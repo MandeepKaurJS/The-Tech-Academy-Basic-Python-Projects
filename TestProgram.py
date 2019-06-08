@@ -3,6 +3,7 @@ mySentence='I love the color'
  
 color_list=['Red','Blue','Green','Pink','Teal','Black']
 def Color_function():
-     print("".format(color_list[0]))
+    for i in color_list:
+        print("{} {}".format(mySentence,i))
 
 Color_function()
