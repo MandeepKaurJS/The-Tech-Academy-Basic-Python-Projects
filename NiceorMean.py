@@ -15,7 +15,7 @@ def describe_game(name):
     if name !="":
         print("\n tahnk you for playing again, {} !".format(name))
     else:
-        stop:True
+        stop=True
         while stop:
             if name=="":
                 name=input("\n What is your name? \n >>>").capitalize()
@@ -55,6 +55,11 @@ def win(nice,mean,name):
     print("\n Nice job {}, you win ! \n Everyone loves you and you've \n made lots of friends along the way!".format(name))
     #call again function and pass in our variables
     again(nice,mean,name)
+def lose(nice,mean,name):
+    #subsitude the {} wildcards with our variable values
+    print("\n ahh to bad,game over! \n {}, you win ! you live in a dirty beat-up \n van by the river, wretched and alone !".format(name))
+    #call again function and pass in our variables
+    again(nice,mean,name)
 def again(nice,mean,name):
     stop=True
     while stop:
@@ -68,5 +73,11 @@ def again(nice,mean,name):
             quit()
         else:
             print("\n Enter {Y} for 'YES', {N} for 'NO': \n>>>")
+def reset(nice,mean,name):
+    nice=0
+    mean=0
+    #notice , I do not reset the name variable as that same user has elected to play
+    start(nice,mean,name)
+
 if __name__=="__main__":
     start()
