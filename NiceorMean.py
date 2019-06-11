@@ -50,5 +50,23 @@ def score(nice,mean,name):
         lose(nice,mean,name)
     else: #else,call the nice_mean function passing in the variables aso it can use them
         nice_mean(nice,mean,name)
+def win(nice,mean,name):
+    #subsitude the {} wildcards with our variable values
+    print("\n Nice job {}, you win ! \n Everyone loves you and you've \n made lots of friends along the way!".format(name))
+    #call again function and pass in our variables
+    again(nice,mean,name)
+def again(nice,mean,name):
+    stop=True
+    while stop:
+        choice=input("\nDo you to play again? (y/n) \n>>>").lower()
+        if choice=="y":
+            stop=False
+            reset(nice,mean,name)
+        if choice == "n":
+            print("\n Oh, so sad, sorry to see you go!")
+            stop=False
+            quit()
+        else:
+            print("\n Enter {Y} for 'YES', {N} for 'NO': \n>>>")
 if __name__=="__main__":
     start()
