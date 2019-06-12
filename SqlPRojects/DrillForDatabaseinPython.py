@@ -29,7 +29,7 @@ for list in fileList:
             cur.execute("Insert into tb1_AllFiles(col_Files) values (?)",list)
             conn.commit()
 conn.close()"""
-        
+con.close()        
     
 #conn = sqlite3.connect('ShowFiles.db')
 
