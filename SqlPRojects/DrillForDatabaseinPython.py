@@ -1,43 +1,39 @@
 import sqlite3,re,os
 conn = sqlite3.connect('ShowFiles.db')
-
+#create a Database 
 with conn:
     cur = conn.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS tb1_AllFiles( ID INTEGER PRIMARY KEY AUTOINCREMENT,col_Files TEXT )")
     conn.commit()
 conn.close()
-def checkext(filename):
-    if re.search('\.txt$',filename,flags=re.IGNORECASE):
-        return('txt')
+#list of files 
 fileList = ('information.docx','Hello.txt','myImage.png', \
             'myMovie.mpg','World.txt','data.pdf','myPhoto.jpg')
 conn = sqlite3.connect('ShowFiles.db')
-for list in fileList:
-   # fname,fileextension=os.path.splitext(list)
-    #print("{}==>{}".format(list,checkext(list)))
-    for e in list.split():
-        if e.endswith(".txt"):
-            print(list)
-            with conn:
-                cur=conn.cursor()
-                cur.executemany("Insert into tb1_AllFiles(col_Files) values (?)",list)
-                conn.commit()
-            
-    """if list.split(".")[1]=="txt":
+#Iterate the list by using for loop
+for item in fileList:
+    #if item from list is end with .txt insert it to database
+    if item.endswith("txt"):
+        print(item)
         with conn:
             cur=conn.cursor()
-            cur.execute("Insert into tb1_AllFiles(col_Files) values (?)",list)
-            conn.commit()
-conn.close()"""
-con.close()        
-    
-#conn = sqlite3.connect('ShowFiles.db')
-
-"""with conn:
+            cur.execute("Insert into tb1_AllFiles(col_Files) values (?)",[item])
+            #item +=1
+        conn.commit()
+#Iterate data from database        
+conn = sqlite3.connect('ShowFiles.db')
+with conn:
+    cur=conn.cursor()
+    cur.execute("Select * from tb1_AllFiles")
+    varFiles= cur.fetchall()
+    for item in varFiles:
+        print(varFiles)
+conn.commit()
+'''with conn:
     cur=conn.cursor()
     cur.execute("delete from tb1_AllFiles")
     conn.commit()
-conn.close()"""
+conn.close()'''
 
     
     
