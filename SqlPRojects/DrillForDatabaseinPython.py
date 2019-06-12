@@ -15,11 +15,11 @@ for item in fileList:
     #if item from list is end with .txt insert it to database
     if item.endswith("txt"):
         print(item)
-        with conn:
+        '''with conn:
             cur=conn.cursor()
             cur.execute("Insert into tb1_AllFiles(col_Files) values (?)",[item])
             #item +=1
-        conn.commit()
+        conn.commit()'''
 #Iterate data from database        
 conn = sqlite3.connect('ShowFiles.db')
 with conn:
@@ -27,7 +27,7 @@ with conn:
     cur.execute("Select * from tb1_AllFiles")
     varFiles= cur.fetchall()
     for item in varFiles:
-        print(varFiles)
+        print(item)
 conn.commit()
 '''with conn:
     cur=conn.cursor()
