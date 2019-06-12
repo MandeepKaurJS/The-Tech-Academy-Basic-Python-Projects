@@ -26,21 +26,24 @@ class ParentWindow(Frame):
         print(self.varFname.get())
         print(self.varLname.get())'''
         #add labels
-        self.lblFname=Label(self.master,text='First Name:',font=("Helvetic",16),fg='Black',bg='lightblue')
-        self.lblFname.grid(row=0,column=0)
+        self.lblFname=Label(self.master,text='First Name:',font=("Helvetic",16),fg='Black',bg='lightgrey')
+        self.lblFname.grid(row=0,column=0,padx=(30,0),pady=(30,0))
         #second Label
-        self.lblLname=Label(self.master,text='Last Name:',font=("Helvetic",16),fg='Black',bg='lightblue')
-        self.lblLname.grid(row=1,column=0)
+        self.lblLname=Label(self.master,text='Last Name:',font=("Helvetic",16),fg='Black',bg='lightgrey')
+        self.lblLname.grid(row=1,column=0,padx=(30,0),pady=(30,0))
         #for paint the text box using Entry method of Tk
         #pss the fname value to text
         self.txtFname=Entry(self.master, text=self.varFname,font=("Helvetica",16),fg='black',bg='lightblue')
         #for showing it using
-        self.txtFname.grid(row=0 , column=1)
+        self.txtFname.grid(row=0 , column=1,padx=(30,0),pady=(30,0))
          #for paint the text box using Entry method of Tk
         #pss the Lname value to text
         self.txtLname=Entry(self.master, text=self.varLname,font=("Helvetica",16),fg='black',bg='lightblue')
         #for showing it using pack()
-        self.txtLname.grid(row=1 , column=1)
+        self.txtLname.grid(row=1 , column=1,padx=(30,0),pady=(30,0))
+        #creating buttons and sticky set where you want to stick
+        self.btnSubmit=Button(self.master,text="Submit",width=10,height=2)
+        self.btnSubmit.grid(row=2 , column=1,padx=(0,0),pady=(30,0),sticky=NE)
         
 
 
