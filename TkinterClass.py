@@ -20,21 +20,27 @@ class ParentWindow(Frame):
         self.varFname=StringVar()
         self.varLname=StringVar()
         #use set for set the value 
-        self.varFname.set('Mandeep')
+        '''self.varFname.set('Mandeep')
         self.varLname.set('Kaur')
         #print for get the value use get()
         print(self.varFname.get())
-        print(self.varLname.get())
+        print(self.varLname.get())'''
+        #add labels
+        self.lblFname=Label(self.master,text='First Name:',font=("Helvetic",16),fg='Black',bg='lightblue')
+        self.lblFname.grid(row=0,column=0)
+        #second Label
+        self.lblLname=Label(self.master,text='Last Name:',font=("Helvetic",16),fg='Black',bg='lightblue')
+        self.lblLname.grid(row=1,column=0)
         #for paint the text box using Entry method of Tk
         #pss the fname value to text
         self.txtFname=Entry(self.master, text=self.varFname,font=("Helvetica",16),fg='black',bg='lightblue')
         #for showing it using
-        self.txtFname.pack()
+        self.txtFname.grid(row=0 , column=1)
          #for paint the text box using Entry method of Tk
         #pss the Lname value to text
         self.txtLname=Entry(self.master, text=self.varLname,font=("Helvetica",16),fg='black',bg='lightblue')
         #for showing it using pack()
-        self.txtLname.pack()
+        self.txtLname.grid(row=1 , column=1)
         
 
 
