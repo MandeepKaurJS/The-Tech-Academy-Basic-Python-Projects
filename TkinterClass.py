@@ -31,6 +31,9 @@ class ParentWindow(Frame):
         #second Label
         self.lblLname=Label(self.master,text='Last Name:',font=("Helvetic",16),fg='Black',bg='lightgrey')
         self.lblLname.grid(row=1,column=0,padx=(30,0),pady=(30,0))
+        #Label for displaying name on submit button
+        self.lblDisplay=Label(self.master,text='',font=("Helvetica",16),fg='Black',bg='lightgrey')
+        self.lblDisplay.grid(row=3,column=1,padx=(30,0),pady=(30,0))
         #for paint the text box using Entry method of Tk
         #pss the fname value to text
         self.txtFname=Entry(self.master, text=self.varFname,font=("Helvetica",16),fg='black',bg='lightblue')
@@ -42,8 +45,19 @@ class ParentWindow(Frame):
         #for showing it using pack()
         self.txtLname.grid(row=1 , column=1,padx=(30,0),pady=(30,0))
         #creating buttons and sticky set where you want to stick
-        self.btnSubmit=Button(self.master,text="Submit",width=10,height=2)
+        self.btnSubmit=Button(self.master,text="Submit",width=10,height=2,command=self.submit)
         self.btnSubmit.grid(row=2 , column=1,padx=(0,0),pady=(30,0),sticky=NE)
+        #creating buttons and sticky set where you want to stick assignning command using command
+        self.btnCancel=Button(self.master,text="Cancel",width=10,height=2,command=self.cancel)
+        self.btnCancel.grid(row=2 , column=1,padx=(0,90),pady=(30,0),sticky=NE)
+    def submit(self):
+        #getting value from textBox
+        fn=self.varFname.get()
+        fl=self.varLname.get()
+        self.lblDisplay.config(text='Hello {} {} !'.format(fn,fl))
+    def cancel(self):
+        #use destroy() for close the window
+        self.master.destroy()
         
 
 
