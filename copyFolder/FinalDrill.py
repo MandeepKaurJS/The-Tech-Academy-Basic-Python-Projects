@@ -49,6 +49,7 @@ class ParentWindow(Frame):
                 show=os.path.join(dirname,f)
                 showtime=time.ctime(os.path.getmtime(show))
                 print("{} {}".format(show,showtime))
+                shutil.move(f,destfolder)
         with conn:
             cur=conn.cursor()
             cur.execute("Insert into tb1_AllFiles(col_Files,created_at) values (?,?)",[f,showtime])
