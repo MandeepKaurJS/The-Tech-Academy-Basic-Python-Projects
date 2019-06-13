@@ -1,6 +1,9 @@
 #for calling all widgets
-import tkinter as tk
 from tkinter import *
+import tkinter as tk
+
+#calling our classes 
+import phonebook_func,phonebook_gui
 #Frame is the tKinter frame class
 class ParentWindow(Frame):
     #for initilize these lines are important
@@ -9,11 +12,11 @@ class ParentWindow(Frame):
         Frame.__init__ (self,master,*args,**kwargs)
         #Define our master frame configuration
         self.master= master
-        self.master.minimize(500,300)
-        self.master.maximize(500,300)
+        self.master.minsize(500,300)
+        self.master.maxsize(500,300)
         #this CenterWindow method will center my app in tkinter
         phonebook_func.center_window(self,500,300)
-        self.master.title("The Tkinter PjoneBook Demo")
+        self.master.title("The Tkinter PhoneBook Demo")
         self.master.config(bg="#F0F0F0")
         #This protocol method is a tkinter built-in method to catch
         #if the user clicks the upper corner ,"X" on window

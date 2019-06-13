@@ -1,5 +1,5 @@
 #for calling all widgets
-import tkinter
+import tkinter ,os
 from tkinter import *
 #parent class with tkinter
 class ParentWindow(Frame):
@@ -58,7 +58,7 @@ class ParentWindow(Frame):
     def cancel(self):
         #use destroy() for close the window
         self.master.destroy()
-        
+        os._exit(0)
 
 
 
