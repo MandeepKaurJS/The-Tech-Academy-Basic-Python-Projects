@@ -1,8 +1,7 @@
 #for calling all widgets
-import tkinter ,os,shutil,time
+import tkinter ,os,time,glob
 from tkinter import *
 from tkinter import filedialog
-import sqlite3
 #parent class with tkinter
 class ParentWindow(Frame):
     #for initilize these lines are important
@@ -21,48 +20,35 @@ class ParentWindow(Frame):
         #add labels
         self.btnShow=Button(self.master,text="Browse..",font=('Helvetica',16),fg='Black',bg='lightgrey',command=self.showfiles)
         self.btnShow.grid(row=0,column=0,padx=(30,0),pady=(30,0))
-               
         #createing string
         self.folder_path=StringVar()
         #Label for displaying name on submit button
         self.lblDisplay=Label(self.master,textvariable=self.folder_path,font=("Helvetica",16),fg='Black',bg='lightgrey')
-        self.lblDisplay.grid(row=2,column=0,padx=(30,0),pady=(30,0))
+        self.lblDisplay.grid(row=1,column=0,padx=(30,0),pady=(30,0))
     def showfiles(self):
-        conn = sqlite3.connect('ShowFiles.db')
-        #create a Database 
-        with conn:
-            cur = conn.cursor()
-            cur.execute("CREATE TABLE IF NOT EXISTS tb1_AllFiles( ID INTEGER PRIMARY KEY AUTOINCREMENT,col_Files TEXT )")
-            conn.commit()
-        conn.close()
         global folder_path
         dirname=filedialog.askdirectory()
         destfolder=filedialog.askdirectory()
         files=os.listdir(dirname)
-        now=time.time()
-        #conn = sqlite3.connect('ShowFiles.db')
         for f in files:
             src=(dirname)+f
-            #dest=(destfolder)+f
-            show=os.path.join(dirname,f)
-            #print(show)
-            showtime=time.ctime(os.path.getmtime(show))
-            
+            des=(destfolder)+f
+            newest=
             '''with conn:
                 cur=conn.cursor()
                 cur.execute("Insert into tb1_AllFiles(col_Files) values (?)",[f])
                     #item +=1
                 conn.commit()
             conn.close()'''
-            #if item from list is end with .txt insert it to database
             if f.endswith(".txt"):
+                show=os.path.join(dirname,f)
+                showtime=time.ctime(os.path.getmtime(show))
                 print("{} {}".format(show,showtime))
-                shutil.move(f,destfolder)
-                #print(item)
-                
-    def moveFiles(self):
-        destfolder=filedialog.askdirectory()
-        
+                #shutil.move(f,destfolder)
+        self.folder_path.set(dirname)
+        print(dirname)
+        return dirname
+        #self.lblDisplay.config("{}".format(self.lblDisplay))
         
         
     

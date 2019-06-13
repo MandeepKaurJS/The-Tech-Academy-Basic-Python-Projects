@@ -21,7 +21,9 @@ class ParentWindow(Frame):
         #add labels
         self.btnShow=Button(self.master,text="Browse..",font=('Helvetica',16),fg='Black',bg='lightgrey',command=self.showfiles)
         self.btnShow.grid(row=0,column=0,padx=(30,0),pady=(30,0))
-               
+        self.btnDest=Button(self.master,text="Browse..",font=('Helvetica',16),fg='Black',bg='lightgrey',command=self.moveFiles)
+        self.btnDest.grid(row=1,column=0,padx=(30,0),pady=(30,0))
+        
         #createing string
         self.folder_path=StringVar()
         #Label for displaying name on submit button
@@ -40,26 +42,16 @@ class ParentWindow(Frame):
         destfolder=filedialog.askdirectory()
         files=os.listdir(dirname)
         now=time.time()
-        #conn = sqlite3.connect('ShowFiles.db')
         for f in files:
             src=(dirname)+f
-            #dest=(destfolder)+f
-            show=os.path.join(dirname,f)
-            #print(show)
-            showtime=time.ctime(os.path.getmtime(show))
-            
-            '''with conn:
-                cur=conn.cursor()
-                cur.execute("Insert into tb1_AllFiles(col_Files) values (?)",[f])
-                    #item +=1
-                conn.commit()
-            conn.close()'''
-            #if item from list is end with .txt insert it to database
-            if f.endswith(".txt"):
-                print("{} {}".format(show,showtime))
-                shutil.move(f,destfolder)
-                #print(item)
-                
+            dest=(destfolder)+f
+            if(os.stat(src).st_mtime>now-1*86400):
+                if os.path.isfile(src):
+                    shutill.move(src,dest)
+                    print("File move alright")
+        self.folder_path.set(dirname)
+        print(dirname)
+        return dirname
     def moveFiles(self):
         destfolder=filedialog.askdirectory()
         
