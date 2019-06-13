@@ -3,7 +3,8 @@ from tkinter import *
 import tkinter as tk
 
 #calling our classes 
-import phonebook_func,phonebook_gui
+import phonebook_func
+import phonebook_gui
 #Frame is the tKinter frame class
 class ParentWindow(Frame):
     #for initilize these lines are important
