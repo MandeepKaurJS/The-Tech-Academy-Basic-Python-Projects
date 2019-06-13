@@ -55,8 +55,6 @@ class ParentWindow(Frame):
             cur.execute("Insert into tb1_AllFiles(col_Files,created_at) values (?,?)",[f,showtime])
             conn.commit()
         conn.close()
-            
-                #shutil.move(f,destfolder)
         self.folder_path.set(dirname)
         print(dirname)
         return dirname
