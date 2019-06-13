@@ -1,7 +1,8 @@
-import os,time
+import os,time,glob
 # open a file
 fpath="C:\\Users\\VrinMan Dulay\\Documents\\GitHub\\The-Tech-Academy-Basic-Python-Projects\\"
 dirs=os.listdir(fpath)
+print(max(glob.glob(),key=os.path.getmtime))
 #this would print all the files and directories
 print("List of files and folders: \n")
 for file in dirs:

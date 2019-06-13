@@ -2,6 +2,7 @@
 import tkinter ,os,time,glob
 from tkinter import *
 from tkinter import filedialog
+import datetime,sqlite3
 #parent class with tkinter
 class ParentWindow(Frame):
     #for initilize these lines are important
@@ -30,20 +31,30 @@ class ParentWindow(Frame):
         dirname=filedialog.askdirectory()
         destfolder=filedialog.askdirectory()
         files=os.listdir(dirname)
+        conn = sqlite3.connect('CreationOfFiles.db')
+        #create a Database 
+        with conn:
+            cur = conn.cursor()
+            cur.execute("CREATE TABLE IF NOT EXISTS tb1_AllFiles( ID INTEGER PRIMARY KEY AUTOINCREMENT,col_Files TEXT,created_at DATE )")
+            conn.commit()
+        conn.close()
+        conn = sqlite3.connect('CreationOfFiles.db')
         for f in files:
             src=(dirname)+f
             des=(destfolder)+f
-            newest=
-            '''with conn:
-                cur=conn.cursor()
-                cur.execute("Insert into tb1_AllFiles(col_Files) values (?)",[f])
-                    #item +=1
-                conn.commit()
-            conn.close()'''
+            show=os.path.join(dirname,f)
+            showtime=time.ctime(os.path.getmtime(show))
+            #print(showtime)
             if f.endswith(".txt"):
                 show=os.path.join(dirname,f)
                 showtime=time.ctime(os.path.getmtime(show))
                 print("{} {}".format(show,showtime))
+        with conn:
+            cur=conn.cursor()
+            cur.execute("Insert into tb1_AllFiles(col_Files,created_at) values (?,?)",[f,showtime])
+            conn.commit()
+        conn.close()
+            
                 #shutil.move(f,destfolder)
         self.folder_path.set(dirname)
         print(dirname)
