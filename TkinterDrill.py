@@ -13,7 +13,7 @@ class ParentWindow(Frame):
         #we can also give the size according to our requirement by using geometry
         self.master.geometry('{}x{}'.format(700,300))
         #use title for title for the window
-        self.master.title("Learning Tkinter!")
+        self.master.title("Check files")
         #configure backgroud color with color name or hex color combinations
         self.master.config(bg='darkgrey')
         #Create vatiable and use them and 
@@ -36,17 +36,17 @@ class ParentWindow(Frame):
         self.btncheckforFiles.grid(row=2,column=0,padx=(30,0),pady=(10,0))
                #for paint the text box using Entry method of Tk
         #pss the fname value to text
-        self.txtFname=Entry(self.master, text=self.varFname,font=("Helvetica",16),fg='black',bg='white')
+        self.txtFname=Entry(self.master,width=35,font=("Helvetica",16),fg='black',bg='white')
         #for showing it using
-        self.txtFname.grid(row=0 , column=1,columnspan=7,padx=(30,0),pady=(30,0))
+        self.txtFname.grid(row=0 ,column=1,padx=(20,0),pady=(30,0))
          #for paint the text box using Entry method of Tk
         #pss the Lname value to text
-        self.txtLname=Entry(self.master, text=self.varLname,font=("Helvetica",16),fg='black',bg='white')
+        self.txtLname=Entry(self.master,width=35,font=("Helvetica",16),fg='black',bg='white')
         #for showing it using pack()
-        self.txtLname.grid(row=1 , column=1,columnspan=7,padx=(30,0),pady=(30,0))
+        self.txtLname.grid(row=1 ,column=1,padx=(20,0),pady=(10,0))
         #creating buttons and sticky set where you want to stick
-        self.btnSubmit=Button(self.master,text="Close Program",width=15,height=2,font=("Helvetic",16),fg='Black',bg='lightgrey')
-        self.btnSubmit.grid(row=2 , column=3,padx=(0,0),pady=(10,0),sticky=NE)
+        self.btnSubmit=Button(self.master,width=15,height=2,text="Close Program",font=("Helvetica",16),fg='Black',bg='lightgrey')
+        self.btnSubmit.grid(row=2 , column=1,padx=(10,0),pady=(10,0),sticky=NE)
        
     def submit(self):
         #getting value from textBox

@@ -38,7 +38,7 @@ class ParentWindow(Frame):
         #pss the fname value to text
         self.txtFname=Entry(self.master, text=self.varFname,font=("Helvetica",16),fg='black',bg='lightblue')
         #for showing it using
-        self.txtFname.grid(row=0 , column=1,padx=(30,0),pady=(30,0))
+        self.txtFname.grid(row=0 , column=1,rowspan=1,columnspan=5,padx=(30,0),pady=(30,0))
          #for paint the text box using Entry method of Tk
         #pss the Lname value to text
         self.txtLname=Entry(self.master, text=self.varLname,font=("Helvetica",16),fg='black',bg='lightblue')
