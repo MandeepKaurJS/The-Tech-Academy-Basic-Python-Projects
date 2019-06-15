@@ -2,7 +2,7 @@
 import tkinter ,os,time,glob
 from tkinter import *
 from tkinter import filedialog
-import datetime,sqlite3
+import datetime,sqlite3,shutil
 #parent class with tkinter
 class ParentWindow(Frame):
     #for initilize these lines are important
@@ -38,23 +38,35 @@ class ParentWindow(Frame):
             cur.execute("CREATE TABLE IF NOT EXISTS tb1_AllFiles( ID INTEGER PRIMARY KEY AUTOINCREMENT,col_Files TEXT,created_at DATE )")
             conn.commit()
         conn.close()
-        conn = sqlite3.connect('CreationOfFiles.db')
+        
+        now=time.time()
+        old_files = [] # list of files older than 7 days
+        new_files = [] # list of files newer than 1 day
         for f in files:
-            src=(dirname)+f
-            des=(destfolder)+f
-            show=os.path.join(dirname,f)
-            showtime=time.ctime(os.path.getmtime(show))
-            #print(showtime)
+            fn = os.path.join(dirname, f)
+            mtime = os.stat(fn).st_mtime
+            if mtime > now - 1 * 86400:
+                conn = sqlite3.connect('CreationOfFiles.db')
+                # this is a new file
+                new_files.append(fn)
+                filestime=time.ctime(os.path.getmtime(fn))
+                print(filestime)
+                '''with conn:
+                    cur=conn.cursor()
+                    cur.execute("Insert into tb1_AllFiles(col_Files,created_at) values (?,?)",[f,fn])
+                    conn.commit()
+                    conn.close()'''
+            elif mtime < now - 7 * 86400:
+                # this is an old file
+                old_files.append(fn)
+                filestimes=time.ctime(os.path.getmtime(fn))
+                print(filestime)
+            # else file between 1 and 7 days old, ignore
             if f.endswith(".txt"):
-                show=os.path.join(dirname,f)
-                showtime=time.ctime(os.path.getmtime(show))
+                showtime=time.ctime(os.path.getmtime(fn))
                 print("{} {}".format(show,showtime))
-                shutil.move(f,destfolder)
-        with conn:
-            cur=conn.cursor()
-            cur.execute("Insert into tb1_AllFiles(col_Files,created_at) values (?,?)",[f,showtime])
-            conn.commit()
-        conn.close()
+                shutil.move(fn,destfolder)
+        
         self.folder_path.set(dirname)
         print(dirname)
         return dirname

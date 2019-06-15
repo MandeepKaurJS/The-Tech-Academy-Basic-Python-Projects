@@ -21,9 +21,6 @@ class ParentWindow(Frame):
         #add labels
         self.btnShow=Button(self.master,text="Browse..",font=('Helvetica',16),fg='Black',bg='lightgrey',command=self.showfiles)
         self.btnShow.grid(row=0,column=0,padx=(30,0),pady=(30,0))
-        self.btnDest=Button(self.master,text="Browse..",font=('Helvetica',16),fg='Black',bg='lightgrey',command=self.moveFiles)
-        self.btnDest.grid(row=1,column=0,padx=(30,0),pady=(30,0))
-        
         #createing string
         self.folder_path=StringVar()
         #Label for displaying name on submit button
@@ -42,13 +39,24 @@ class ParentWindow(Frame):
         destfolder=filedialog.askdirectory()
         files=os.listdir(dirname)
         now=time.time()
+        old_files = [] # list of files older than 7 days
+        new_files = [] # list of files newer than 1 day
         for f in files:
-            src=(dirname)+f
-            dest=(destfolder)+f
-            if(os.stat(src).st_mtime>now-1*86400):
-                if os.path.isfile(src):
-                    shutill.move(src,dest)
-                    print("File move alright")
+            fn = os.path.join(dirname, f)
+            mtime = os.stat(fn).st_mtime
+            if mtime > now - 1 * 86400:
+                # this is a new file
+                new_files.append(fn)
+                print(time.ctime(os.path.getmtime(fn)))
+            elif mtime < now - 7 * 86400:
+                # this is an old file
+                old_files.append(fn)
+                print(time.ctime(os.path.getmtime(fn)))
+            # else file between 1 and 7 days old, ignore
+        '''if new_files:
+            # if there are any new files, then delete all old files
+            for fn in old_files:
+                os.remove(fn)'''
         self.folder_path.set(dirname)
         print(dirname)
         return dirname
