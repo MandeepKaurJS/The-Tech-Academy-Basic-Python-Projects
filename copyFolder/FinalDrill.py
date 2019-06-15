@@ -51,11 +51,11 @@ class ParentWindow(Frame):
                 new_files.append(fn)
                 filestime=time.ctime(os.path.getmtime(fn))
                 print(filestime)
-                '''with conn:
+                with conn:
                     cur=conn.cursor()
-                    cur.execute("Insert into tb1_AllFiles(col_Files,created_at) values (?,?)",[f,fn])
+                    cur.execute("Insert into tb1_AllFiles(col_Files,created_at) values (?,?)",[f,filestime])
                     conn.commit()
-                    conn.close()'''
+                conn.close()
             elif mtime < now - 7 * 86400:
                 # this is an old file
                 old_files.append(fn)
@@ -64,15 +64,19 @@ class ParentWindow(Frame):
             # else file between 1 and 7 days old, ignore
             if f.endswith(".txt"):
                 showtime=time.ctime(os.path.getmtime(fn))
-                print("{} {}".format(show,showtime))
+                print("{} {}".format(fn,showtime))
                 shutil.move(fn,destfolder)
         
         self.folder_path.set(dirname)
         print(dirname)
         return dirname
         #self.lblDisplay.config("{}".format(self.lblDisplay))
-        
-        
+'''conn = sqlite3.connect('CreationOfFiles.db')        
+with conn:
+    cur=conn.cursor()
+    cur.execute("delete from tb1_AllFiles")
+    conn.commit()
+conn.close()'''       
     
    
     
