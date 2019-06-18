@@ -81,11 +81,11 @@ class ParentWindow(Frame):
         conn.commit()
         #self.lblDisplay.config("{}".format(self.lblDisplay))
 conn = sqlite3.connect('CopyOfFiles.db')        
-with conn:
+'''with conn:
     cur=conn.cursor()
     cur.execute("delete from tb1_CopyFiles")
     conn.commit()
-conn.close()      
+conn.close() '''     
     
    
     
