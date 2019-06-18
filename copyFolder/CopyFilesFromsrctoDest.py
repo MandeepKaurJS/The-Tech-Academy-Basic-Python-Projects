@@ -25,7 +25,7 @@ class ParentWindow(Frame):
         self.btnShow=Button(self.master,text="Browse..",font=('Helvetica',16),fg='Black',bg='lightgrey',command=self.showfiles)
         self.btnShow.grid(row=0,column=0,padx=(30,0),pady=(30,0))
         #use this directory for copy files from origin
-        self.btndest=Button(self.master,text="Destination..",width=10,height=1,font=('Helvetica',16),fg='Black',bg='lightgrey',command=self.showfiles)
+        self.btndest=Button(self.master,text="Destination..",width=10,height=1,font=('Helvetica',16),fg='Black',bg='lightgrey',command=self.destinationDir)
         self.btndest.grid(row=2,column=0,padx=(30,0),pady=(30,0))
         #show files which are move from origin to destination directory
         self.btnCopy=Button(self.master,text="show Files..",width=10,height=1,font=('Helvetica',16),fg='Black',bg='lightgrey',command=self.showfiles)
@@ -46,18 +46,30 @@ class ParentWindow(Frame):
         self.dirname=filedialog.askdirectory()
         self.files=os.listdir(self.dirname)
         now=time.time()
-        old_files = [] # list of files older than 7 days
-        new_files = [] # list of files newer than 1 day
+        #shutil.move(self.fn,destfolder)
+        
+        self.folder_path.set(self.dirname)
+        print(self.dirname)
+        return self.dirname
+    def destinationDir(self):
+        global dest_path
+        self.destfolder=filedialog.askdirectory()
         for f in self.files:
             self.fn = os.path.join(self.dirname, f)
             if f.endswith(".txt"):
                 showtime=time.ctime(os.path.getmtime(self.fn))
                 print("{} {}".format(self.fn,showtime))
-                #shutil.move(self.fn,destfolder)
-        
-        self.folder_path.set(self.dirname)
-        print(self.dirname)
-        return self.dirname
+                shutil.move(self.fn,self.destfolder)
+                conn = sqlite3.connect('CopyOfFiles.db')
+                with conn:
+                    cur=conn.cursor()
+                    cur.execute("Insert into tb1_CopyFiles(col_Files,created_at) values (?,?)",[f,showtime])
+                    conn.commit()
+                conn.close()
+
+        self.dest_path.set(self.destfolder)
+        print(self.destfolder)
+        return self.destfolder
         #self.lblDisplay.config("{}".format(self.lblDisplay))
 '''conn = sqlite3.connect('CreationOfFiles.db')        
 with conn:
