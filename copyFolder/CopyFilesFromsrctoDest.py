@@ -49,7 +49,7 @@ class ParentWindow(Frame):
         #shutil.move(self.fn,destfolder)
         
         self.folder_path.set(self.dirname)
-        print(self.dirname)
+        #print(self.dirname)
         return self.dirname
     def destinationDir(self):
         global dest_path
@@ -68,7 +68,7 @@ class ParentWindow(Frame):
                 conn.close()
 
         self.dest_path.set(self.destfolder)
-        print(self.destfolder)
+        #print(self.destfolder)
         return self.destfolder
     def showCopyFiles(self):
         conn = sqlite3.connect('CopyOfFiles.db')
@@ -80,12 +80,12 @@ class ParentWindow(Frame):
                 print(item)
         conn.commit()
         #self.lblDisplay.config("{}".format(self.lblDisplay))
-'''conn = sqlite3.connect('CreationOfFiles.db')        
+conn = sqlite3.connect('CopyOfFiles.db')        
 with conn:
     cur=conn.cursor()
-    cur.execute("delete from tb1_AllFiles")
+    cur.execute("delete from tb1_CopyFiles")
     conn.commit()
-conn.close()'''       
+conn.close()      
     
    
     
