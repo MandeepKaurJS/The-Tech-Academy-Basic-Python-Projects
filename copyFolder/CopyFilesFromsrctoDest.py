@@ -28,7 +28,7 @@ class ParentWindow(Frame):
         self.btndest=Button(self.master,text="Destination..",width=10,height=1,font=('Helvetica',16),fg='Black',bg='lightgrey',command=self.destinationDir)
         self.btndest.grid(row=2,column=0,padx=(30,0),pady=(30,0))
         #show files which are move from origin to destination directory
-        self.btnCopy=Button(self.master,text="show Files..",width=10,height=1,font=('Helvetica',16),fg='Black',bg='lightgrey',command=self.showfiles)
+        self.btnCopy=Button(self.master,text="show Files..",width=10,height=1,font=('Helvetica',16),fg='Black',bg='lightgrey',command=self.showCopyFiles)
         self.btnCopy.grid(row=4,column=0,padx=(30,0),pady=(30,0))
         #createing string
         self.folder_path=StringVar()
@@ -70,6 +70,15 @@ class ParentWindow(Frame):
         self.dest_path.set(self.destfolder)
         print(self.destfolder)
         return self.destfolder
+    def showCopyFiles(self):
+        conn = sqlite3.connect('CopyOfFiles.db')
+        with conn:
+            cur=conn.cursor()
+            cur.execute("Select * from tb1_CopyFiles")
+            varFiles= cur.fetchall()
+            for item in varFiles:
+                print(item)
+        conn.commit()
         #self.lblDisplay.config("{}".format(self.lblDisplay))
 '''conn = sqlite3.connect('CreationOfFiles.db')        
 with conn:
