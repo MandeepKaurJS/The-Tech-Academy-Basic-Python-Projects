@@ -1,5 +1,6 @@
-import requests
 from bs4 import BeautifulSoup
+import requests
+
 #Using the requests module ,we use the "get" function
 #proivided to access the webpage provided as an
 #argument to this function
