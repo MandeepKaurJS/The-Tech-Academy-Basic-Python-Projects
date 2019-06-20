@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 #Using the requests module ,we use the "get" function
 #proivided to access the webpage provided as an
 #argument to this function
-result=reqests.get("https://www.google.com/")
+result=requests.get("https://www.google.com/")
 
 #to make sure that  the website is accessible, we can
 #ensure that we obtain a 200 ok response to indicate
