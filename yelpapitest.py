@@ -9,9 +9,10 @@ params = {'term':'seafood','location':'New York City'}
  
 req = requests.get(url, params=params, headers=headers)
  
+
 parsed = json.loads(req.text)
  
-businesses = parsed["businesses":[]]
+businesses = parsed["businesses"]
  
 for business in businesses[:10]:
     print("Name:", business["name"])

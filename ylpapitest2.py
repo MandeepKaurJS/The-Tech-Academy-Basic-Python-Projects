@@ -13,8 +13,9 @@ params = {'term':'seafood','location':'New York City'}
 req=requests.get(url, params=params, headers=headers)
  
 # proceed only if the status code is 200
-print('The status code is {}'.format(req.status_code))
+print('The status code is {}'.format(req.json()))
 # printing the text from the response 
-json.loads(req.text)
+#json.loads(req.text)
+
  
  
