@@ -1,0 +1,76 @@
+string patter = @"(\bQ\S*z\b (\d+))";//quiz 
+            string path = @"../../Docs/Quizzes.txt";
+            var allLines = Helper.ReadDocument(path);
+            string[] lines = File.ReadAllLines(path);
+            foreach(string line in lines)
+            {
+                MatchCollection collection = Regex.Matches(line, patter);
+                foreach (Match m in collection)
+                {
+                    Console.WriteLine(m.Value);
+                }
+            }
+
+ //string[] number = Regex.Split(firstLine, @"\D+");
+            //foreach (string value in number)
+            //{
+            //    if (!string.IsNullOrEmpty(value))
+            //    {
+            //        int i = int.Parse(value);
+            //        Console.WriteLine("Number:{0}", i);
+            //        QuizId = Convert.ToInt32(Char.GetNumericValue(firstLine[5]));
+            //    }
+            //}
+            //var getNumbers = (from t in firstLine
+            //                  where char.IsDigit(t)
+            //                  select t).ToArray();
+
+            //Console.WriteLine(new string(getNumbers));
+            //Console.WriteLine(QuizId);
+string[] result = firstLine.Length % 2 == 0 ? new string[firstLine.Length / 2] : new string[(firstLine.Length / 2) + 1];
+            int index = 0;
+            for (int i = 0; i < firstLine.Length; i += 5)
+            {
+                result[index] = (firstLine[i] + firstLine[i + 1]).ToString();
+                index++;
+            }
+            if (firstLine.Length % 2 != 0)
+            {
+                result[index] = (firstLine[firstLine.Length - 1]).ToString();
+            }
+//if (quizDataList.Contains("Quiz"))
+            //{
+            //    QuizId = Convert.ToInt32(Char.GetNumericValue(firstLine[7]));
+            //}
+            //QuizId = Convert.ToInt32(Char.GetNumericValue(firstLine[5]));
+            //for(var i = 0; i < quizDataList.Count; i++)
+            //{
+            //    var firstLine = quizDataList[0];
+            //    QuizId = Convert.ToInt32(Char.GetNumericValue(firstLine[5]));
+            //    if(Regex.IsMatch(quizDataList[i], @"(\bQ\S*z\b(\d +))"))
+            //    {
+            //        QuizId = Convert.ToInt32(char.GetNumericValue(quizDataList[i].Substring(0,));
+            //    }
+            //}
+            string patter = @"(\bQ\S*z\b (\d+))";//quiz 
+            string path = @"../../Docs/Quizzes.txt";
+            var allLines = Helper.ReadDocument(path);
+            string[] lines = File.ReadAllLines(path);
+
+            foreach (string line in lines)
+            {
+                MatchCollection collection = Regex.Matches(line, patter);
+
+                foreach (Match m in collection)
+                {
+                    //QuizId = Convert.ToInt32(Char.GetNumericValue(m));
+                    Console.WriteLine(m.Value);
+                    //QuizId = Convert.ToInt32(Char.GetNumericValue(firstLine[5]));
+                }
+            }
+
+            if (firstLine.Length == 6)
+            {
+                string s1 = string.Join("", firstLine[5], 6);
+                QuizId = Convert.ToInt32(Char.GetNumericValue(firstLine[5]));
+            }
